@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: app
+    
+  datasource:
+    url: jdbc:mysql://localhost:3306/restaurant_db?createDatabaseIfNotExist=true
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # Automatically creates tables from your Entities
+    show-sql: true # Helpful for debugging your database queries
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Fulfills Authentication requirement [cite: 59, 88]
+          issuer-uri: http://localhost:8080/realms/RestaurantRealm
+          jwk-set-uri: http://localhost:8080/realms/RestaurantRealm/protocol/openid-connect/certs
+
+server:
+  port: 8081 # Common practice to run Backend on 8081 if React is on 3000
